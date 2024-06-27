@@ -21,29 +21,42 @@ PLAYER_VEL = 5
 
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 
-# receives : ... 
-# modifies : ...
-# returns: ...
-# general description: ...
+# receives : sprites(images in png format) 
+# modifies : nothing
+# returns: a surface that is flipped in the x-axis, but not the y-axis
+# general description: nothing at this moment
 def flip(sprites):
     return [pygame.transform.flip(sprite, True, False) for sprite in sprites]
 
-# receives : ... 
+# receives : two directories with the width and height respectively, default sprite direction is facing right(False) if set to true, it faces left
 # modifies : ...
 # returns: ...
 # general description: ...
 def load_sprite_sheets(dir1, dir2, width, height, direction=False):
+    #creates path to assests file and to the sprite directories
     path = join(mypath,"assets", dir1, dir2)
+    #lists all directories inside path and if the file exists, it joins the file "f" to the path(a string) 
+    #this is a list of strings that signifies a path to images
     images = [f for f in listdir(path) if isfile(join(path, f))]
-
+    #initialized as an empty dictionary
     all_sprites = {}
 
+    # iterates over each image path inside images(a list) 
     for image in images:
+        #loading the image by giving it a path within the directory
+        #convert_alpha gives png images, per pixel transparency
+        #sprite_sheet loads in a surface object
         sprite_sheet = pygame.image.load(join(path, image)).convert_alpha()
 
+        # an empty list
         sprites = []
-        for i in range(sprite_sheet.get_width() // width):
+        #iterates of the range of sprite_sheet and gets the width and floor divides by the width variable
+        #why tho??
+        for i in range(sprite_sheet.get_width() // width): 
+            #creates an object to show the images with height and width coordinates
+            #srcalpha smoothens the animation transition(it is a flag), 32 is the depth 
             surface = pygame.Surface((width, height), pygame.SRCALPHA, 32)
+            
             rect = pygame.Rect(i * width, 0, width, height)
             surface.blit(sprite_sheet, (0, 0), rect)
             sprites.append(pygame.transform.scale2x(surface))
@@ -428,7 +441,7 @@ def main(window):
     fire2.on()
     spike = Spike(100, HEIGHT - block_size - 64, 16, 32)
     
-    non_floor = map_one.map_og(block_size,fire,spike)
+    non_floor = map_one.map_og(block_size,fire)
 
     offset_x = 0
     scroll_area_width = 200
