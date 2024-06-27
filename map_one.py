@@ -1,14 +1,14 @@
 from tutorial import Block, HEIGHT
 
-def map_og(block_size, fire, spike):
+def map_og(block_size, fire,fire2, spike):
     list = [
         Block(0, HEIGHT - block_size * 2, block_size),
         Block(block_size * 3, HEIGHT - block_size * 4, block_size),
-        fire,
+        fire,fire2,
         Block(block_size * 6, HEIGHT - block_size * 6, block_size),
         Block(block_size * 9, HEIGHT - block_size * 4, block_size),
         Block(block_size * 12, HEIGHT - block_size * 4, block_size),
-        fire,
+        spike,
         Block(block_size * 15, HEIGHT - block_size * 6, block_size),
         Block(block_size * 18, HEIGHT - block_size * 4, block_size),
         Block(block_size * 21, HEIGHT - block_size * 2, block_size),
@@ -34,6 +34,7 @@ def map_og(block_size, fire, spike):
         Block(block_size * 81, HEIGHT - block_size * 6, block_size),
         Block(block_size * 84, HEIGHT - block_size * 4, block_size),
         Block(block_size * 87, HEIGHT - block_size * 2, block_size),
+        Block(block_size * 90, HEIGHT - block_size * 2, block_size)
     ]
 
     return list
