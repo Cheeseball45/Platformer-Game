@@ -56,11 +56,15 @@ def load_sprite_sheets(dir1, dir2, width, height, direction=False):
             #creates an object to show the images with height and width coordinates
             #srcalpha smoothens the animation transition(it is a flag), 32 is the depth 
             surface = pygame.Surface((width, height), pygame.SRCALPHA, 32)
-            
+            #generate a rect with top at 0,
+            #and changing left depending on iteration, and the width and hieght given
             rect = pygame.Rect(i * width, 0, width, height)
+            #copies the source "surface" and draws it into sprite_sheet object,
+            #and positions the drawing at (0,0), of the rect given to the function
             surface.blit(sprite_sheet, (0, 0), rect)
+            #appends a surface twice the size of the surface to the sprites list
             sprites.append(pygame.transform.scale2x(surface))
-
+            
         if direction:
             all_sprites[image.replace(".png", "") + "_right"] = sprites
             all_sprites[image.replace(".png", "") + "_left"] = flip(sprites)
