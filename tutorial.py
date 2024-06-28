@@ -30,7 +30,7 @@ def flip(sprites):
 
 # receives : two directories with the width and height respectively, default sprite direction is facing right(False) if set to true, it faces left
 # modifies : ...
-# returns: ...
+# returns: the all sprites with the direction they are in
 # general description: ...
 def load_sprite_sheets(dir1, dir2, width, height, direction=False):
     #creates path to assests file and to the sprite directories
@@ -65,6 +65,9 @@ def load_sprite_sheets(dir1, dir2, width, height, direction=False):
             #appends a surface twice the size of the surface to the sprites list
             sprites.append(pygame.transform.scale2x(surface))
             
+            #if the direction is changed to the right, keep the sprites the same
+            #if the direction is changed to the left, flip the sprite to face left
+            #otherwise keep the sprite the same
         if direction:
             all_sprites[image.replace(".png", "") + "_right"] = sprites
             all_sprites[image.replace(".png", "") + "_left"] = flip(sprites)
